@@ -9,18 +9,24 @@
 
 'use strict';
 
-require('yargonaut')
-  .style('cyan')
-  .helpStyle('green.bold')
-  .style('yellow', 'required');
+var pkg = require('../package.json');
+var program = require('commander');
+program
+    .version(pkg.version)
+    .option('-H, --host <host>', 'Host to connect to. Default localhost', '0.0.0.0')
+    .option('-u, --user <user>', 'Username for basic auth', 'guest')
+    .option('-P, --pass <pass>', 'Password for basic auth', 'guest')
+    .option('-p, --port <port>', 'Port to connect to. Default 54321', 3333);
 
-var argv = require('yargs')
-    .usage('Usage: $0 <command> [options]')
-      .version( function() {
-  		return 'cicerone version: ' + require( '../package' ).version;
-        })
-      .help('h')
-      .alias('h', 'help')
-      .alias( 'help', '?' )
-      .epilog('MIT License 2015')
-      .argv;
+
+
+program.on('--help', function(){
+  console.log('  Examples:');
+  console.log('');
+  console.log('    $ repl --port 3333 --host 0.0.0.0');
+  console.log('');
+});
+
+program.parse(process.argv);
+require('../lib/utils').setTerminalTitle('poke-repl');
+require('../lib/client')(program);
