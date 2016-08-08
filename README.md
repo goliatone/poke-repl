@@ -6,8 +6,8 @@ Remote REPL client and server
 Install the module with: `npm install poke-repl`
 
 ```javascript
-var poke_repl = require('poke-repl');
-poke_repl.awesome(); // "awesome"
+var repl = new REPL(config);
+repl.start();
 ```
 
 ## Documentation
