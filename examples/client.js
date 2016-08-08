@@ -7,7 +7,7 @@ program
     .option('-P, --pass <pass>', 'Password for basic auth', 'guest')
     .option('-p, --port <port>', 'Port to connect to. Default 54321', 3333);
 
-require('../lib/utils').setTerminalTitle('s2-influx-pub');
+
 
 program.on('--help', function(){
   console.log('  Examples:');
@@ -17,5 +17,5 @@ program.on('--help', function(){
 });
 
 program.parse(process.argv);
-
+require('../lib/utils').setTerminalTitle('poke-repl');
 require('../lib/client')(program);
