@@ -11,20 +11,60 @@ repl.start();
 ```
 
 ## Documentation
-_(Coming soon)_
+
+#### Firewall
+Barebones IP firewall so you can limit connections to internal subnets. Use alongside with authentication.
+
+
+Rules:
+
+```js
+var config = {
+    firewall: {
+        rules: [
+            {ip: '', subnet: 14, rule: 'ACCEPT'}
+        ]
+    }
+};
+```
+
+Policy:
+```
+var config = {
+    firewall: {
+        policy: 'ACCEPT'
+    }
+};
+```
+#### Authentication
+Currently it only supports basic auth.
+
+```
+var config = {
+    auth: {
+        seed: require('poke-repl/lib/utils').generateSeed(),
+        enabled: true,
+        users:[{
+            username: 'admin', password: 'secret!'
+        }]
+    }
+};
+```
+
 
 ## Examples
 _(Coming soon)_
 
 ## Roadmap
-- [ ] Add firewall
+- [x] Add firewall
 - [ ] Move auth to middleware
 - [ ] Move firewall to middleware
 - [ ] Make banner a config option.
 
 ## Release History
-* 2016-08-08 v.0.2.0 Fix bug/typo
-* 2016-08-08 v.0.1.0 initial release
+* 2016-08-09 v0.3.0 Added firewall
+* 2016-08-08 v0.2.0 Fix bug/typo
+* 2016-08-08 v0.1.0 initial release
 
 ## License
 Copyright (c) 2016 goliatone  
