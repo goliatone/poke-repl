@@ -34,6 +34,7 @@
   "dependencies": {
     "commander": "^2.9.0",
     "gextend": "^0.1.6",
+    "insubnet": "0.0.8",
     "yargonaut": "^1.1.2",
     "yargs": "^3.30.0"
   },
