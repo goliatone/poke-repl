@@ -26,5 +26,4 @@ var config = {
     }
 };
 
-var repl = new REPL(config);
-repl.start();
+REPL.createServer(config).listen();
