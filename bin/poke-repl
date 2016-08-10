@@ -19,15 +19,17 @@ program
     .option('--verbose', 'Make verbose output')
     .option('-p, --port <port>', 'Port to connect to. Default 54321', 3333);
 
-
-
 program.on('--help', function(){
   console.log('  Examples:');
   console.log('');
   console.log('    $ repl --port 3333 --host 0.0.0.0');
   console.log('');
+  console.log('  Version: %s', pkg.version);
+  console.log('');
 });
 
 program.parse(process.argv);
+
 require('../lib/utils').setTerminalTitle('poke-repl');
+
 require('../lib/client')(program);
