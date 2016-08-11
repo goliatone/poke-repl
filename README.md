@@ -29,7 +29,7 @@ var config = {
 ```
 
 Policy:
-```
+```js
 var config = {
     firewall: {
         policy: 'ACCEPT'
@@ -39,7 +39,7 @@ var config = {
 #### Authentication
 Currently it only supports basic auth.
 
-```
+```js
 var config = {
     auth: {
         seed: require('poke-repl/lib/utils').generateSeed(),
@@ -60,6 +60,7 @@ _(Coming soon)_
 - [ ] Move auth to middleware
 - [ ] Move firewall to middleware
 - [ ] Make banner a config option.
+- [ ] Collect all sockets, then repl.stop sockets.map sock.end
 
 ## Release History
 * 2016-08-09 v0.3.0 Added firewall
@@ -72,3 +73,10 @@ Licensed under the MIT license.
 
 ## Contributing
 In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using [Grunt](http://gruntjs.com/).
+
+
+
+<!--
+https://github.com/martinj/node-net-repl/blob/master/lib/repl.js
+https://github.com/dshaw/replify
+-->
