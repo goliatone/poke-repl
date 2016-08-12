@@ -25,7 +25,7 @@ var config = {
     firewall:{
         policy: 'ACCEPT',
         rules: [
-            {ip:'127.0.0.1', rule: 'ACCEPT'}
+            {ip:'127.0.0.1', rule: 'REJECT'}
         ]
     }
 };
