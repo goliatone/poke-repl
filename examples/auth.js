@@ -1,8 +1,12 @@
 var REPL = require('../lib/repl');
-
+var pkg = require('../package.json');
 var config = {
     root: __dirname,
-
+    metadata:{
+        name: 'auth-demo',
+        version: pkg.version,
+        environment: 'development'
+    },
     context: {
         app:{
             logger:console,
