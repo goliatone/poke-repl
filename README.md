@@ -56,13 +56,18 @@ var config = {
 _(Coming soon)_
 
 ## Roadmap
-- [x] Add firewall
-- [ ] Move auth to middleware
-- [ ] Move firewall to middleware
-- [ ] Make banner a config option.
-- [ ] Collect all sockets, then repl.stop sockets.map sock.end
+- [ ] Make backoff mechanism, prevent too many connections.
+- [x] Add firewall:
+    - [ ] Monitor repeated connections from same remoteAddress.
+- [x] Move auth to middleware:
+    - [ ] Monitor repeated connections from same remoteAddress.
+- [x] Move firewall to middleware.
+- [x] Make banner a config option:
+    - [ ] Ensure we can remove banner.
+- [ ] Collect all sockets, then repl.stop sockets.map sock.end.
 
 ## Release History
+* 2016-08-16 v0.4.0 Added firewall
 * 2016-08-09 v0.3.0 Added firewall
 * 2016-08-08 v0.2.0 Fix bug/typo
 * 2016-08-08 v0.1.0 initial release
