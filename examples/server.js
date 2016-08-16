@@ -1,6 +1,6 @@
 var REPL = require('../lib/repl');
 
-var repl = new REPL({
+var config = {
     root: __dirname,
     metadata:{
         name: 'Test',
@@ -21,6 +21,6 @@ var repl = new REPL({
             }
         }
     }
-});
+};
 
-repl.start();
+REPL.createServer(config).listen();
