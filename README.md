@@ -67,7 +67,8 @@ _(Coming soon)_
 - [ ] Collect all sockets, then repl.stop sockets.map sock.end.
 
 ## Release History
-* 2016-08-16 v0.4.0 Added firewall
+* 2016-08-16 v0.5.0 Remove unused dependencies
+* 2016-08-16 v0.4.0 Refactoring
 * 2016-08-09 v0.3.0 Added firewall
 * 2016-08-08 v0.2.0 Fix bug/typo
 * 2016-08-08 v0.1.0 initial release
