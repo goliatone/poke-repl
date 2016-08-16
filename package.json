@@ -35,9 +35,7 @@
     "assert-is": "^0.5.0",
     "commander": "^2.9.0",
     "gextend": "^0.1.6",
-    "insubnet": "0.0.8",
-    "yargonaut": "^1.1.2",
-    "yargs": "^3.30.0"
+    "insubnet": "0.0.8"
   },
   "devDependencies": {
     "mocha-sinon": "^1.1.4",
