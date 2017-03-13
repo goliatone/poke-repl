@@ -40,7 +40,17 @@ var config = {
         }
     },
     tls: {
-        key: fs.readFileSync('./tls/server/private-key.pem'),
+        // key: fs.readFileSync('./tls/poke-certs/poke-server.key'),
+        // cert: fs.readFileSync('./tls/poke-certs/poke-server.crt'),
+        // /*
+        //  * Needed since the client uses self-signed certs
+        //  * and we care about implicit auth.
+        //  */
+        // ca: [
+        //     fs.readFileSync('./tls/poke-certs/client.poke.io.crt')
+        // ],
+
+        key:  fs.readFileSync('./tls/server/private-key.pem'),
         cert: fs.readFileSync('./tls/server/certificate.pem'),
         /*
          * Needed since the client uses self-signed certs
