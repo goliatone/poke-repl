@@ -45,7 +45,7 @@ var config = {
         // /*
         //  * Needed since the client uses self-signed certs
         //  * and we care about implicit auth.
-        //  */
+        // */
         // ca: [
         //     fs.readFileSync('./tls/poke-certs/client.poke.io.crt')
         // ],
@@ -74,3 +74,7 @@ var config = {
 };
 
 REPL.createServer(config).listen();
+
+console.log('TLS REPL Server created...');
+console.log('You can connect ussing openssl:');
+console.log('openssl s_client -connect 127.0.0.1:3333 -key ./tls/client/private-key.pem -cert ./tls/client/certificate.pem');
