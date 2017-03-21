@@ -18,6 +18,7 @@ make_certs(){
 }
 
 echo "Generating keys and certs for server..."
+mkdir -p server
 cd server
 echo ""
 make_certs
@@ -25,6 +26,7 @@ make_certs
 cd ..
 
 echo "Generating keys and certs for client..."
+mkdir -p client
 cd client
 echo ""
 make_certs
