@@ -3,6 +3,7 @@ var program = require('commander');
 program
     .version(pkg.version)
     .option('-H, --host <host>', 'Host to connect to. Default localhost', '0.0.0.0')
+    .option('-t, --tls', 'Use TLS encrypted connection', true)
     .option('-u, --user <user>', 'Username for basic auth', 'guest')
     .option('-P, --pass <pass>', 'Password for basic auth', 'guest')
     .option('-p, --port <port>', 'Port to connect to. Default 54321', 3333);

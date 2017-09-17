@@ -1,8 +1,11 @@
+/*jshint esversion:6, node:true*/
+'use strict';
+
 var REPL = require('../lib/repl');
 
 var config = {
     root: __dirname,
-    metadata:{
+    metadata: {
         name: 'Test',
         version: '0.0.0',
         environment: 'development'
