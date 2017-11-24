@@ -27,7 +27,7 @@ test('The history module should load a history file', (t) => {
 });
 
 
-test.only('The history module should save a history file', (t) => {
+test('The history module should save a history file', (t) => {
     const expected = _load('history_file.json');
 
     const src = fixture('history_file.txt');
