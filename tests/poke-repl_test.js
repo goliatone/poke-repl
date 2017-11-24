@@ -1,20 +1,14 @@
 'use strict';
 
-var assert = require('chai').assert;
-var sinon = require('sinon');
-var path = require('path');
-var fixture = path.resolve.bind(path, __dirname, 'fixtures');
+const test = require('tape');
+const sinon = require('sinon');
 
-sinon.assert.expose(assert, { prefix: '' });
+const path = require('path');
+const fixture = path.resolve.bind(path, __dirname, 'fixtures');
 
-var poke_repl = require('..');
+const Module = require('..');
 
-
-describe('poke-repl', function(){
-
-    describe('constructor', function(){
-        it('should provide a DEFAULTS object', function(){
-            assert.isObject(poke_repl.DEFAULTS);
-        });
-    });
+test('Module should be bootstraped OK', (t)=>{
+    t.ok(Module.DEFAULTS);
+    t.end();
 });
