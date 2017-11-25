@@ -6,41 +6,44 @@ Remote REPL client and server
 Install the module with: `npm install poke-repl`
 
 ```javascript
-var repl = new REPL(config);
+const repl = new REPL(config);
 repl.start();
 ```
 
 ## Documentation
 
 #### Firewall
+
 Barebones IP firewall so you can limit connections to internal subnets. Use alongside with authentication.
 
 
 Rules:
 
 ```js
-var config = {
+const config = {
     firewall: {
         rules: [
-            {ip: '', subnet: 14, rule: 'ACCEPT'}
+            { ip: '', subnet: 14, rule: 'ACCEPT' }
         ]
     }
 };
 ```
 
 Policy:
+
 ```js
-var config = {
+const config = {
     firewall: {
         policy: 'ACCEPT'
     }
 };
 ```
 #### Authentication
+
 Currently it only supports basic auth.
 
 ```js
-var config = {
+const config = {
     auth: {
         seed: require('poke-repl/lib/utils').generateSeed(),
         enabled: true,
