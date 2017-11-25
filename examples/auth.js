@@ -1,22 +1,25 @@
-var REPL = require('../lib/repl');
-var pkg = require('../package.json');
-var config = {
+'use strict';
+
+const REPL = require('../lib/repl');
+const pkg = require('../package.json');
+
+const config = {
     root: __dirname,
-    metadata:{
+    metadata: {
         name: 'auth-demo',
         version: pkg.version,
         environment: 'development'
     },
     context: {
-        app:{
-            logger:console,
-            mute: function(){
+        app: {
+            logger: console,
+            mute: function () {
                 console.log('MUTE');
             },
-            unmute: function(){
+            unmute: function () {
                 console.log('UNMUTE');
             },
-            config:{
+            config: {
                 name: 'poke-repl'
             }
         }
@@ -24,7 +27,7 @@ var config = {
     auth: {
         seed: require('../lib/utils').generateSeed(),
         enabled: true,
-        users:[{
+        users: [{
             username: 'goliatone', password: 'admin'
         }]
     }

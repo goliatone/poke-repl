@@ -28,20 +28,26 @@
     "node": ">= 0.10.0"
   },
   "scripts": {
-    "test": "./node_modules/mocha/bin/mocha test/*_test.js",
-    "dtest": "./node_modules/mocha/bin/mocha test/*_test.js -G -w --reporter spec --slow 500"
+    "test": "bogota",
+    "dtest": "watch bogota tests/"
   },
   "dependencies": {
     "assert-is": "^0.5.0",
     "commander": "^2.9.0",
     "gextend": "^0.1.6",
+    "gkeypath": "^0.7.0",
     "insubnet": "0.0.8"
   },
   "devDependencies": {
-    "mocha-sinon": "^1.1.4",
-    "chai": "^2.2.0",
-    "sinon": "^1.14.1",
-    "mocha": "^2.2.4"
+    "bogota": "^2.0.4",
+    "fs-equal": "^1.1.1",
+    "jshint": "^2.9.5",
+    "nyc": "^11.3.0",
+    "sinon": "^4.1.2",
+    "tap-spec": "^4.1.1",
+    "tape": "^4.8.0",
+    "tape-catch": "^1.0.6",
+    "watch": "^1.0.2"
   },
   "keywords": [
     "repl",

@@ -1,34 +1,36 @@
-var REPL = require('../lib/repl');
-var pkg = require('../package.json');
+'use strict';
 
-var config = {
+const REPL = require('../lib/repl');
+const pkg = require('../package.json');
+
+const config = {
     root: __dirname,
-    metadata:{
+    metadata: {
         name: 'firewall-demo',
         version: pkg.version,
         environment: 'development'
     },
     context: {
-        app:{
-            logger:console,
-            mute: function(){
+        app: {
+            logger: console,
+            mute: function () {
                 console.log('MUTE');
             },
-            unmute: function(){
+            unmute: function () {
                 console.log('UNMUTE');
             },
-            config:{
+            config: {
                 name: 'poke-repl'
             }
         }
     },
-    firewall:{
+    firewall: {
         policy: 'ACCEPT',
         rules: [
-            {ip:'127.0.0.1', rule: 'ACCEPT'}
+            { ip: '127.0.0.1', rule: 'ACCEPT' }
         ]
     }
 };
 
-var repl = new REPL(config);
+const repl = new REPL(config);
 repl.start();
