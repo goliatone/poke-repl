@@ -24,7 +24,11 @@ test('Auth will be skipped if auth is not enabled in config', (t) => {
         }
     };
 
-    const config = {};
+    const config = {
+        logger: {
+            error: NOOP
+        }
+    };
 
     Module(socketMock, config, (...args) => {
         t.notOk(socketMock.msg, 'We dont send messages over the socket');
@@ -45,9 +49,8 @@ test('Auth send AUTHORIZE command if auth enabled in config', (t) => {
 
     const config = {
         auth: {
-            username: 'goliatone',
-            password: 'secrets',
-            enabled: true
+            enabled: true,
+            users: []
         },
         logger: {
             log: NOOP
@@ -68,13 +71,12 @@ test('Auth will not authenticate if not users are available', (t) => {
 
     const config = {
         auth: {
-            username: 'goliatone',
-            password: 'secrets',
             enabled: true,
             // users: []
         },
         logger: {
             log: NOOP,
+            error: NOOP,
             warn: NOOP
         }
     };
@@ -99,6 +101,7 @@ test('Auth will authenticate once there is data available', (t) => {
         },
         logger: {
             log: NOOP,
+            error: NOOP,
             warn: NOOP
         }
     };
