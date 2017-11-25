@@ -62,7 +62,8 @@ test.only('Middleware handles rejects connection if middleware fails', (t) => {
 
     const server = {
         logger: {
-            info: NOOP
+            info: NOOP,
+            error: NOOP
         },
         onConnectionComplete: NOOP,
         onConnectionRejected: function (sock, msg) {
