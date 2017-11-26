@@ -10,6 +10,8 @@
 
 const pkg = require('../package.json');
 const program = require('commander');
+const setTerminalTitle = require('../lib/utils').setTerminalTitle;
+const Client = require('../lib/client');
 
 program
   .version(pkg.version)
@@ -30,6 +32,6 @@ program.on('--help', function () {
 
 program.parse(process.argv);
 
-require('../lib/utils').setTerminalTitle('poke-repl');
+setTerminalTitle('poke-repl');
 
-require('../lib/client')(program);
+new Client(program);
