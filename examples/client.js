@@ -2,6 +2,7 @@
 
 const pkg = require('../package.json');
 const program = require('commander');
+const Client = require('../lib/client');
 
 program
   .version(pkg.version)
@@ -23,4 +24,4 @@ program.parse(process.argv);
 
 require('../lib/utils').setTerminalTitle('poke-repl');
 
-require('../lib/client')(program);
+new Client(program);
