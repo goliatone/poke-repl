@@ -37,9 +37,9 @@ repl.listen();
  * It will set the client's prompt to dirty
  * to let the user know of the update.
  */
-setTimeout(()=>{
+setTimeout(() => {
     console.log('repl.updateContext');
-    repl.updateContext('app.notify', (msg)=> {
+    repl.updateContext('app.notify', (msg) => {
         console.log('client notify', msg);
     });
 }, 5000);
