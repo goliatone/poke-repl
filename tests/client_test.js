@@ -10,6 +10,27 @@ const ERRORS = require('../lib/client').ERRORS;
 
 const NOOP = () => { };
 
+const MOCK = {
+    makeStdin: () => {
+        return {
+            pipe: NOOP,
+            setRawMode: NOOP,
+            write: NOOP,
+            emit: NOOP,
+            on: NOOP
+        }
+    },
+    makeStdout: () => {
+        return {
+            pipe: NOOP,
+            setRawMode: NOOP,
+            write: NOOP,
+            emit: NOOP,
+            on: NOOP
+        }
+    }
+};
+
 test('Client has DEFAULTS exposed', (t) => {
     t.ok(Client.DEFAULTS);
     t.end();
@@ -19,6 +40,7 @@ test('Client should take in configuration options', (t) => {
     const config = {
         host: 'localhost',
         port: 1234,
+        connected: true,
         logger: {
             info: NOOP
         },
@@ -27,7 +49,9 @@ test('Client should take in configuration options', (t) => {
                 on: NOOP,
                 connect: NOOP
             }
-        }
+        },
+        makeStdin: MOCK.makeStdin,
+        makeStdout: MOCK.makeStdout
     };
 
     let conn = new Client(config);
@@ -42,6 +66,7 @@ test('Client register listeners to handle the socket connection', (t) => {
     const config = {
         host: 'localhost',
         port: 1234,
+        connected: true,
         logger: {
             info: NOOP
         },
@@ -52,7 +77,9 @@ test('Client register listeners to handle the socket connection', (t) => {
                 },
                 connect: NOOP
             }
-        }
+        },
+        makeStdin: MOCK.makeStdin,
+        makeStdout: MOCK.makeStdout
     };
 
     let conn = new Client(config);
@@ -68,6 +95,7 @@ test('Client starts connection with port and host properties', (t) => {
     const config = {
         host: 'localhost',
         port: 1234,
+        connected: true,
         logger: {
             info: NOOP
         },
@@ -102,7 +130,9 @@ test('Client handles handshacke cycle: CONNECT command', (t) => {
             t.isEqual(socket.eventNames().indexOf('data'), -1, 'Remove data listener');
             t.ok(true, 'CONNECT command calls handleConnection');
             t.end();
-        }
+        },
+        makeStdin: MOCK.makeStdin,
+        makeStdout: MOCK.makeStdout
     };
 
     let conn = new Client(config);
@@ -126,7 +156,9 @@ test('Client handles handshacke cycle: AUTHORIZE command', (t) => {
             }
         },
         makeClientInstance: () => socket,
-        handleConnection: NOOP
+        handleConnection: NOOP,
+        makeStdin: MOCK.makeStdin,
+        makeStdout: MOCK.makeStdout
     };
 
     const expected = utils.encrypt(config.user + ' ' + config.pass, SEED);
@@ -158,7 +190,9 @@ test('Client handles handshacke cycle: AUTHORIZE command requires seed', (t) => 
         closeConnection: (err) => {
             t.equal(err, ERRORS.SERVER_ERROR);
             t.end();
-        }
+        },
+        makeStdin: MOCK.makeStdin,
+        makeStdout: MOCK.makeStdout
     };
 
     let conn = new Client(config);
@@ -183,7 +217,9 @@ test('Client handles handshacke cycle: AUTHORIZE command requires user', (t) => 
         closeConnection: (err) => {
             t.equal(err, ERRORS.MISSING_USER);
             t.end();
-        }
+        },
+        makeStdin: MOCK.makeStdin,
+        makeStdout: MOCK.makeStdout
     };
 
     let conn = new Client(config);
@@ -208,10 +244,90 @@ test('Client handles handshacke cycle: AUTHORIZE command requires pass', (t) => 
         closeConnection: (err) => {
             t.equal(err, ERRORS.MISSING_PASS);
             t.end();
-        }
+        },
+        makeStdin: MOCK.makeStdin,
+        makeStdout: MOCK.makeStdout
     };
 
     let conn = new Client(config);
 
     conn.handshacke(COMMANDS.AUTHORIZE);
 });
+
+test('Client handles connections by piping socket to stdin', (t) => {
+    const socket = new EventListener();
+    socket.connect = NOOP;
+    socket.pipe = NOOP;
+
+    const config = {
+        autoinitialize: true,
+        socket,
+        makeClientInstance: () => socket,
+        makeStdin: () => {
+            return {
+                pipe: (p) => {
+                    t.equal(p, socket, 'We pipe out to socket');
+                    t.end();
+                },
+                setRawMode: NOOP,
+                on: NOOP
+            }
+        },
+        makeStdout: MOCK.makeStdout
+    };
+
+    let conn = new Client(config);
+
+    conn.handleConnection();
+});
+
+test('Client handles connections by setting raw mode', (t) => {
+    const socket = new EventListener();
+    socket.connect = NOOP;
+    socket.pipe = NOOP;
+
+    const config = {
+        makeClientInstance: () => socket,
+        makeStdin: () => {
+            return {
+                pipe: NOOP,
+                setRawMode: (mode) => {
+                    t.equal(mode, true, 'We set raw mode');
+                    t.end();
+                },
+                on: NOOP
+            }
+        },
+        makeStdout: MOCK.makeStdout,
+        handshacke: NOOP
+    };
+
+    let conn = new Client(config);
+
+    conn.handleConnection();
+});
+
+test('Client handles connections by piping stdout to socket', (t) => {
+    const socket = new EventListener();
+    socket.connect = NOOP;
+
+    const expected = MOCK.makeStdout();
+
+    const config = {
+        makeClientInstance: () => socket,
+        makeStdout: () => expected,
+        makeStdin: MOCK.makeStdin,
+        handshacke: NOOP
+    };
+
+    socket.pipe = (stdout) => {
+        t.equal(stdout, expected, 'We pipe to stdout');
+        t.end();
+    };
+
+    let conn = new Client(config);
+
+    conn.handleConnection();
+});
+
+
