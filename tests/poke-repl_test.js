@@ -8,7 +8,7 @@ const fixture = path.resolve.bind(path, __dirname, 'fixtures');
 
 const Module = require('..');
 
-test('Module should be bootstraped OK', (t)=>{
+test('Module should be bootstraped OK', (t) => {
     t.ok(Module.DEFAULTS);
     t.end();
 });
