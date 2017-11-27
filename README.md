@@ -91,4 +91,5 @@ https://github.com/dshaw/replify
 
 http://www.lihaoyi.com/post/BuildyourownCommandLinewithANSIescapecodes.html
 http://wiki.bash-hackers.org/scripting/terminalcodes
+https://github.com/dshaw/replify/blob/master/test/replify.test.js
 -->
