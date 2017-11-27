@@ -90,4 +90,5 @@ https://github.com/martinj/node-net-repl/blob/master/lib/repl.js
 https://github.com/dshaw/replify
 
 http://www.lihaoyi.com/post/BuildyourownCommandLinewithANSIescapecodes.html
+http://wiki.bash-hackers.org/scripting/terminalcodes
 -->
